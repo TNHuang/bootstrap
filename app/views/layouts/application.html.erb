@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%= stylesheet_link_tag 'application' %>
+  <%= javascript_include_tag 'application' %>
+  <link rel="stylesheet" href="../../assets/stylesheets/bootstrap.css" type="text/css" media="screen" title="no title" charset="utf-8">
+
+  <%= csrf_meta_tags %>
+  <title>NewAuthDemo</title>
+  <style> ul{margin: 0; padding: 0;list-style:none;}</style>
+</head>
+<body data-spy="scroll" data-target=".sidebar">
+
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" >
+          <span class="sr-only">Toggle testing</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">OUR AWESOME APP!</a>
+      </div>
+      <div class="navbar-collapse collapse" style="height: 1px" id="navbar-collapse">
+        <ul class="navbar-nav nav">
+          <li class="active"><a href="<%= static_pages_home_url %>">Home</a></li>
+          <li ><a href="<%= static_pages_contact_url %>" >Contact</a></li>
+          <li ><a href="<%= static_pages_about_url %>">About</a></li>
+          <li ><a href="<%= static_pages_help_url %>">Help</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              AWESOME DROPDOWN WUT
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li ><a href="#" >One</a></li>
+              <li class="divider"></li>
+              <li ><a href="#">Two</a></li>
+              <li class="divider"></li>
+              <li ><a href="#" >3</a></li>
+            </ul>
+          </li>
+
+        </ul>
+      </div>
+
+    </div>
+
+
+  </nav>
+
+
+
+  <!--    <nav class="navbar-default nav" >
+  <div class="navbar-header">
+  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+  <span class="sr-only">Toggle navigation</span>
+  <span class="icon-bar"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+  <ul class="nav-pills nav">
+  <li class="active"><a href="#">Home</a></li>
+  <li ><a href="#" >Away</a></li>
+  <li ><a href="#">From</a></li>
+  <li ><a href="#">Home</a></li>
+  </ul>
+  </div>
+  </div>
+  </nav> -->
+
+  <br>
+  <br>
+  <div class="container">
+    <% if signed_in? %>
+    <ul>
+      <li>Signed in as: <%= current_user.username %></li>
+      <li><%= button_to "Sign Out", session_url, :method => :delete %></li>
+    </ul>
+    <% else %>
+    <p>
+      <%= link_to "Sign In", new_session_url %> or
+      <%= link_to "Sign up", new_user_url %>
+    </p>
+    <% end %>
+
+    <hr>
+
+    <% if flash[:errors] %>
+    <h3>Please fix the following errors:</h3>
+    <ul>
+      <% flash[:errors].each do |error| %>
+      <li><%= error %></li>
+      <% end %>
+    </ul>
+    <% end %>
+  </div>
+
+  <div class="container">
+    <%= yield %>
+  </div>
+
+</body>
+</html>
